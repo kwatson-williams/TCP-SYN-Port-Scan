@@ -51,7 +51,8 @@ The Protocol Hierarchy tool was used to understand the overall distribution of t
 - No high-risk file-sharing protocols (e.g., BitTorrent) were present.
 - No clear-text administrative protocols (e.g., Telnet) were observed, helping to focus the investigation specifically on **TCP anomalies**.
 
-![Step 2 — Protocol Hierarchy Statistics](tcp_images/step2_protocol_hierarchy.png)
+<img width="1572" height="723" alt="step2_protocol_hierarchy" src="https://github.com/user-attachments/assets/472d9d7f-ee67-4ef5-acc0-a18048d5a574" />
+
 
 ---
 
@@ -63,7 +64,8 @@ The Conversations tool was used across both **IPv4 and Ethernet** layers to iden
 
 This step was critical in uncovering the attack pattern — it revealed that a single internal host (`10.2.2.8`) was communicating with dozens of unique external IPs, which is highly abnormal behavior consistent with a coordinated scanning effort.
 
-![Step 3 — Conversations Tool (IPv4)](tcp_images/step3_conversations_ipv4.png)
+<img width="1455" height="994" alt="step3_conversations_ipv4" src="https://github.com/user-attachments/assets/e66180b6-831a-41c7-afb2-bc738bf815cd" />
+
 
 ---
 
@@ -79,7 +81,8 @@ Wireshark display filters were applied to strip away background noise and focus 
 
 These filters confirmed that the internal host was receiving a large volume of inbound SYN packets from many different external sources — a definitive indicator of a port scan.
 
-![Step 4 — Display Filters Applied](tcp_images/step4_display_filters.png)
+<img width="1690" height="910" alt="step4_display_filters" src="https://github.com/user-attachments/assets/1203f2bf-b8bf-461b-90f7-70f267a8be56" />
+
 
 ---
 
@@ -91,7 +94,8 @@ Wireshark's built-in color coding was used to visually identify protocol anomali
 
 The ARP packet stood out as a potential **"Man-in-the-Middle" spoofing attempt**, prompting a deeper look before it was ruled out as a false lead in a later step.
 
-![Step 5 — Color Coding & ARP Packet Identification](tcp_images/step5_color_coding_arp.png)
+<img width="1696" height="880" alt="step5_color_coding_arp" src="https://github.com/user-attachments/assets/7b4f5a8a-d2bc-4cde-b04f-6afcdfcf65a4" />
+
 
 ---
 
@@ -111,7 +115,8 @@ Using the Conversations tool, a highly suspicious and mechanically consistent pa
 
 The mechanical consistency of **exactly 2 packets and 108 bytes per connection** across dozens of unique external IPs is a strong **Indicator of Compromise (IOC)**. This uniformity is characteristic of an **automated scanning tool**, not human-initiated behavior.
 
-![Step 6 — IOC Pattern in Conversations](tcp_images/step6_ioc_pattern.png)
+<img width="1459" height="994" alt="step6_ioc_pattern" src="https://github.com/user-attachments/assets/255677a8-b5ae-4b2a-a505-c47186709d23" />
+
 
 ---
 
@@ -128,7 +133,8 @@ A targeted display filter was applied to confirm the nature of the attack at the
 
 This confirms a **TCP SYN Port Scan**. The attackers were sending the initial TCP handshake request (`SYN`) to probe whether Port 80 was open — without completing the three-way handshake. The high volume of requests from many different external source IPs indicates a **coordinated, distributed reconnaissance effort** designed to map the organization's network defenses.
 
-![Step 7 — SYN Flood Packets Targeting Port 80](tcp_images/step7_syn_flood_confirmation.png)
+<img width="1684" height="898" alt="step7_syn_flood_confirmation" src="https://github.com/user-attachments/assets/3231b03b-5bfc-4343-8160-d2f95756f942" />
+
 
 ---
 
@@ -144,7 +150,8 @@ Two false leads were investigated and ruled out during the analysis.
 - **Assumption:** The yellow ARP packet (Packet 27) was suspected as a potential **Man-in-the-Middle ARP spoofing** attempt due to the sudden protocol change.
 - **Correction:** Deep analysis revealed this was simply `10.2.2.5` asking *"Who has 10.2.2.1?"* (the default gateway) — a **completely standard network function** required for internet access. Identifying this as benign allowed focus to return to the external threat.
 
-![Step 8 — ARP False Lead Analysis](tcp_images/step8_false_lead_arp.png)
+<img width="1696" height="880" alt="step8_false_lead_arp" src="https://github.com/user-attachments/assets/8bb6c855-1c68-41d1-83fd-afc651d1e9a7" />
+
 
 ---
 
