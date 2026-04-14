@@ -36,7 +36,7 @@ The capture file `Task #1003.pcapng` was downloaded from the BTLO platform and o
 
 Upon initial inspection, the packet list revealed a mix of standard protocols including **TCP, TLS, and DNS**, providing a starting baseline for the investigation.
 
-![Step 1 — Opening the PCAP in Wireshark](tcp_images/step1_opening_pcap.png)
+<img width="1489" height="906" alt="step1_opening_pcap" src="https://github.com/user-attachments/assets/5b72828b-f2d6-4e2b-b866-645279662a0a" />
 
 ---
 
